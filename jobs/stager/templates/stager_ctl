@@ -27,6 +27,7 @@ export C_INCLUDE_PATH=/var/vcap/packages/mysqlclient/include/mysql:/var/vcap/pac
 export LIBRARY_PATH=/var/vcap/packages/mysqlclient/lib/mysql:/var/vcap/packages/sqlite/lib:/var/vcap/packages/libpq/lib:/var/vcap/packages/imagemagick/lib:$LIBRARY_PATH
 export PATH=/var/vcap/packages/imagemagick/bin:/var/vcap/packages/git/bin:$PATH
 export LANG=en_US.UTF-8
+export PLATFORM_CONFIG=$JOB_DIR/config/platform.yml
 
 source /var/vcap/packages/common/utils.sh
 
@@ -48,19 +49,53 @@ case $1 in
 
     mkdir -p $GEM_CACHE_DIR
 
+    # Remove unused npm cache directory
+    NPM_OLD_CACHE=$GEM_CACHE_DIR/npm_cache/installed
+    if [ -d $NPM_OLD_CACHE ]; then
+      echo "Found old npm cache directory, deleting..."
+      rm -rf $NPM_OLD_CACHE
+    fi
+
     <% if properties.syslog_aggregator %>
     /var/vcap/packages/syslog_aggregator/setup_syslog_forwarder.sh $JOB_DIR/config
     <% end %>
 
+    # Migrate blessed gems to their new home
+    mkdir -p $GEM_CACHE_DIR/blessed_gems
+    if [ -d $GEM_CACHE_DIR/1.8/blessed_gems ]; then
+      mv -n $GEM_CACHE_DIR/1.8/blessed_gems/* $GEM_CACHE_DIR/blessed_gems
+    fi
+    if [ -d $GEM_CACHE_DIR/1.9.1/blessed_gems ]; then
+      mv -n $GEM_CACHE_DIR/1.9.1/blessed_gems/* $GEM_CACHE_DIR/blessed_gems
+    fi
+    rm -rf $GEM_CACHE_DIR/1.8/blessed_gems
+    rm -rf $GEM_CACHE_DIR/1.9.1/blessed_gems
+
+    # Migrate cached gems to their new home
+    mkdir -p $GEM_CACHE_DIR/1.8.7p357
+    if [ -d $GEM_CACHE_DIR/1.8 ]; then
+      mv -n $GEM_CACHE_DIR/1.8/* $GEM_CACHE_DIR/1.8.7p357
+    fi
+    mkdir -p $GEM_CACHE_DIR/1.9.2p180
+    if [ -d $GEM_CACHE_DIR/1.9.1 ]; then
+      mv -n $GEM_CACHE_DIR/1.9.1/* $GEM_CACHE_DIR/1.9.2p180
+    fi
+    rm -rf $GEM_CACHE_DIR/1.8
+    rm -rf $GEM_CACHE_DIR/1.9.1
+
     # Seed the staging cache
-    cp -an /var/vcap/packages/dea_seed/gem_cache/* $GEM_CACHE_DIR
+    # TODO make dea_seed use a single blessed_gems dir and correct version numbers for easier copy
+    cp -an /var/vcap/packages/dea_seed/gem_cache/1.8/gem_cache/* $GEM_CACHE_DIR/1.8.7p357/gem_cache
+    cp -an /var/vcap/packages/dea_seed/gem_cache/1.9.1/gem_cache/* $GEM_CACHE_DIR/1.9.2p180/gem_cache
+    cp -an /var/vcap/packages/dea_seed/gem_cache/1.9.1/blessed_gems/* $GEM_CACHE_DIR/blessed_gems
+
     chown -R vcap:vcap $GEM_CACHE_DIR
 
     /var/vcap/packages/ruby/bin/ruby /var/vcap/packages/stager/bin/create_secure_users.rb
 
-    chown root:root $JOB_DIR/config/sudoers
-    chmod 440 $JOB_DIR/config/sudoers
-    cp $JOB_DIR/config/sudoers /etc/sudoers
+    # Set up sudoers for stager.
+    install_sudoers "$JOB_DIR/config/sudoers" /etc/sudoers.d/stager
+    file_must_include /etc/sudoers '#includedir /etc/sudoers.d'
 
     exec chpst -u vcap:vcap /var/vcap/packages/ruby/bin/ruby \
          /var/vcap/packages/stager/bin/stager \

@@ -18,13 +18,9 @@ index: <%= spec.index %>
 bulk_api:
   host: <%= cc_props.srv_api_uri %>
 
-cc_partition: <%= hm_props.cc_partition || "default" %>
-
-shadow_mode: <%= hm_props.shadow_mode || "enable" %>
-
 intervals:
   <% intervals = hm_props.intervals || OpenStruct.new %>
-  database_scan:         <%= intervals.database_scan         ||  60 %>
+  expected_state_update: <%= intervals.expected_state_update ||  60 %>
   droplet_lost:          <%= intervals.droplet_lost          ||  30 %>
   droplets_analysis:     <%= intervals.droplets_analysis     ||  20 %>
   flapping_death:        <%= intervals.flapping_death        ||   1 %>

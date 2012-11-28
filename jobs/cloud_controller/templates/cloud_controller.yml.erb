@@ -49,7 +49,6 @@ directories:
   droplets: /var/vcap/shared/droplets
   resources: /var/vcap/shared/resources
   staging_manifests: /var/vcap/jobs/cloud_controller/config/staging
-  staging_cache: /var/vcap/data/cloud_controller/staging
   tmpdir: /var/vcap/data/cloud_controller/tmp
 
 logging:
@@ -124,15 +123,7 @@ redis:
 <% end %>
 
 staging:
-  max_concurrent_stagers: <%= cc_props.max_concurrent_stagers || 20 %>
   max_staging_runtime:    <%= cc_props.max_staging_runtime || 300 %>
-  secure: true
-  <% if cc_props.new_stager_percent %>
-  new_stager_percent: <%= cc_props.new_stager_percent %>
-  <% end %>
-  <% if cc_props.new_stager_email_regexp %>
-  new_stager_email_regexp: <%= cc_props.new_stager_email_regexp %>
-  <% end %>
   auth:
     user: <%= cc_props.staging_upload_user %>
     password: <%= cc_props.staging_upload_password %>
@@ -181,16 +172,25 @@ builtin_services:
   <% end %>
 <% end %>
 <% if properties.external_service_tokens %>
-<% properties.external_service_tokens.each do |name,token| %>
+<% properties.external_service_tokens.marshal_dump.each do |name,token| %>
   <%= name %>:
     token: <%= token %>
 <% end %>
 <% end %>
 
-<% if properties.service_broker %>
-service_broker:
-  token: <%= properties.service_broker.token %>
-<% end %>
+<%
+  service_proxy_tokens = []
+  if properties.service_broker
+    properties.service_broker.token.each { |tok| service_proxy_tokens << tok }
+  end
+
+  if properties.marketplace_gateway
+    properties.marketplace_gateway.tokens.each { |tok| service_proxy_tokens << tok }
+  end
+%>
+
+service_proxy:
+  token: <%= "['#{service_proxy_tokens.join("' , '")}']" %>
 
 <%
 if cc_props.service_extension && cc_props.service_extension.service_lifecycle
@@ -225,26 +225,4 @@ service_lifecycle:
   <% end %>
 <% end %>
 
-runtimes:
-  ruby18:
-    version: 1.8.7
-  ruby19:
-    version: 1.9.2
-  node:
-    version: 0.4.12
-  node06:
-    version: 0.6.8
-  node08:
-    version: 0.8.2
-  java:
-    version: 1.6.0
-    debug_modes:
-      - run
-      - suspend
-  java7:
-    version: 1.7.0
-    debug_modes:
-      - run
-      - suspend
-  erlangR14B02:
-    version: ".* 5.8.3"
+runtimes_file: /var/vcap/jobs/cloud_controller/config/runtimes.yml
