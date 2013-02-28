@@ -33,7 +33,7 @@ case $1 in
 
     # HBase ctl scripts manage their pidfiles,
     # so we don't attempt to write ours
-    exec ${HBASE_BIN}/hbase-daemon.sh --config "${HBASE_CONF_DIR}" start zookeeper \
+    exec chpst -u vcap:vcap ${HBASE_BIN}/hbase-daemon.sh --config "${HBASE_CONF_DIR}" start zookeeper \
          >>$LOG_DIR/hbase_zookeeper_start.stdout.log \
          2>>$LOG_DIR/hbase_zookeeper_start.stderr.log
 
@@ -41,7 +41,7 @@ case $1 in
 
   stop)
 
-    exec ${HBASE_BIN}/hbase-daemon.sh --config "${HBASE_CONF_DIR}" stop zookeeper \
+    exec chpst -u vcap:vcap ${HBASE_BIN}/hbase-daemon.sh --config "${HBASE_CONF_DIR}" stop zookeeper \
          >>$LOG_DIR/hbase_zookeeper_stop.stdout.log \
          2>>$LOG_DIR/hbase_zookeeper_stop.stderr.log
 
