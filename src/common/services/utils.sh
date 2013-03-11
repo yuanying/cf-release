@@ -42,7 +42,7 @@ setup_warden() {
 start_warden() {
   cd $PKG_DIR/warden
 
-  export PATH=/var/vcap/packages/ruby/bin:$PATH
+  export PATH=/var/vcap/packages/ruby_next/bin:$PATH
 
   nohup /var/vcap/packages/ruby/bin/bundle exec \
         rake warden:start[$JOB_DIR/config/warden.yml] \
@@ -66,7 +66,7 @@ start_warden() {
     fi
   done
 
-  if [ $warden_start_flag=true ]; then
+  if [ $warden_start_flag = true ]; then
     pid_guard $PIDFILE "Warden"
     echo $warden_pid > $PIDFILE
   else

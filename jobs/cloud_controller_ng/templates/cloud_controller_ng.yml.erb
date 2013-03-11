@@ -58,7 +58,7 @@ logging:
 <% db = p("ccdb_ng.databases").find { |db| db["tag"] == "cc" } %>
 <% db_role = p("ccdb_ng.roles").find { |role| role["tag"] == "admin" } %>
 db:
-  database: <%= p("ccdb_ng.db_scheme") %>://<%= db_role["name"] %>:<%= db_role["password"] %>@<%= p("ccdb_ng.address") %>:<%= p("ccdb_ng.port") %>/<%= db["name"] %>
+  database: <%= p("ccdb_ng.db_scheme") == "mysql" ? "mysql2" : p("ccdb_ng.db_scheme") %>://<%= db_role["name"] %>:<%= db_role["password"] %>@<%= p("ccdb_ng.address") %>:<%= p("ccdb_ng.port") %>/<%= db["name"] %>
   max_connections: <%= p("ccdb_ng.max_connections", 32) %>
   pool_timeout: <%= p("ccdb_ng.pool_timeout", 10) %>
   log_level: <%= p("ccng.db_logging_level", "debug2") %>
@@ -80,7 +80,7 @@ login:
 uaa:
   url: <%= scheme %>://uaa.<%= p("domain") %>
   resource_id: <%= p("ccng.uaa_resource_id") %>
-  symmetric_secret: <%= p("uaa.cc.token_secret") %>
+  symmetric_secret: "<%= p("uaa.cc.token_secret") %>"
   verification_key: <%= p("uaa.jwt.verification_key") ? ("|\n      " + p("uaa.jwt.verification_key").gsub("\n", "\n      ")) : '~' %>
 
 # App staging parameters
@@ -91,6 +91,7 @@ staging:
     password: <%= p("ccng.staging_upload_password") %>
 
 runtimes_file: /var/vcap/jobs/cloud_controller_ng/config/runtimes.yml
+stacks_file: /var/vcap/jobs/cloud_controller_ng/config/stacks.yml
 
 quota_definitions:
   free:
