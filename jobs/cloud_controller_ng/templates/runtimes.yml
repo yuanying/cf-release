@@ -127,6 +127,14 @@ ruby18:
     BUNDLE_GEMFILE:
     PATH: /var/vcap/packages/imagemagick/bin:/var/vcap/packages/dea_transition/rubygems/1.8/bin:/var/vcap/packages/dea_ruby18/bin:/var/vcap/packages/dea_node08/bin:$PATH
     GEM_PATH: /var/vcap/packages/dea_transition/rubygems/1.8:$GEM_PATH
+    <% if properties.env && properties.env.http_proxy %>
+    http_proxy: <%= properties.env.http_proxy %>
+    HTTP_PROXY: <%= properties.env.http_proxy %>
+    <% end %>
+    <% if properties.env && properties.env.https_proxy %>
+    https_proxy: <%= properties.env.https_proxy %>
+    HTTPS_PROXY: <%= properties.env.https_proxy %>
+    <% end %>
   status:
     name: current
   series: ruby18
@@ -144,6 +152,14 @@ ruby19:
     BUNDLE_GEMFILE:
     PATH: /var/vcap/packages/imagemagick/bin:/var/vcap/packages/dea_transition/rubygems/1.9.1/bin:/var/vcap/packages/dea_ruby19/bin:/var/vcap/packages/dea_node08/bin:$PATH
     GEM_PATH: /var/vcap/packages/dea_transition/rubygems/1.9.1:$GEM_PATH
+    <% if properties.env && properties.env.http_proxy %>
+    http_proxy: <%= properties.env.http_proxy %>
+    HTTP_PROXY: <%= properties.env.http_proxy %>
+    <% end %>
+    <% if properties.env && properties.env.https_proxy %>
+    https_proxy: <%= properties.env.https_proxy %>
+    HTTPS_PROXY: <%= properties.env.https_proxy %>
+    <% end %>
   status:
     name: current
   series: ruby19
