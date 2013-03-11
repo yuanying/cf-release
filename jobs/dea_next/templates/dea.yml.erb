@@ -78,6 +78,14 @@ bind_mounts:
 app_environment:
    PATH: "/var/vcap/packages/imagemagick/bin:$PATH"
    LD_LIBRARY_PATH: "/var/vcap/packages/mysqlclient/lib/mysql:/var/vcap/packages/sqlite/lib:/var/vcap/packages/libpq/lib:/var/vcap/packages/imagemagick/lib:$LD_LIBRARY_PATH"
+   <% if properties.env && properties.env.http_proxy %>
+   http_proxy: properties.env.http_proxy
+   HTTP_PROXY: properties.env.http_proxy
+   <% end %>
+   <% if properties.env && properties.env.https_proxy %>
+   https_proxy: properties.env.https_proxy
+   HTTPS_PROXY: properties.env.https_proxy
+   <% end %>
 
 staging:
   enabled: true
@@ -92,5 +100,17 @@ staging:
     LIBRARY_PATH: "/var/vcap/packages/mysqlclient/lib/mysql:/var/vcap/packages/sqlite/lib:/var/vcap/packages/libpq/lib:/var/vcap/packages/imagemagick/lib"
     LD_LIBRARY_PATH: "/var/vcap/packages/mysqlclient/lib/mysql:/var/vcap/packages/sqlite/lib:/var/vcap/packages/libpq/lib:/var/vcap/packages/imagemagick/lib"
     PATH: "/var/vcap/packages/libpq/bin:/var/vcap/packages/dea_node08/bin:/var/vcap/packages/git/bin:/var/vcap/packages/imagemagick/bin"
+    <% if properties.env && properties.env.http_proxy %>
+    http_proxy: properties.env.http_proxy
+    HTTP_PROXY: properties.env.http_proxy
+    <% end %>
+    <% if properties.env && properties.env.https_proxy %>
+    https_proxy: properties.env.https_proxy
+    HTTPS_PROXY: properties.env.https_proxy
+    <% end %>
+    <% if properties.env && properties.env.no_proxy %>
+    no_proxy: properties.env.no_proxy
+    NO_PROXY: properties.env.no_proxy
+    <% end %>
 
 stacks: <%= properties.dea_next && properties.dea_next.stacks || [] %>
