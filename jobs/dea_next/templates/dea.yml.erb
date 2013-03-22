@@ -114,4 +114,4 @@ staging:
     NO_PROXY: <%= properties.env.no_proxy %>
     <% end %>
 
-stacks: <%= properties.dea_next && properties.dea_next.stacks || [] %>
+stacks: <%= properties.dea_next && properties.dea_next.stacks || [ "lucid64" ] %>
