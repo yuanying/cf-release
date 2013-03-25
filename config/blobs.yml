@@ -3,10 +3,6 @@ erlang/otp_src_R14B01.tar.gz:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2E2MWUxMjIyMDRlNGU5ODY0M2Q5YWUwNGYzMDVi%0AMmE2MjE5ZSIsInNpZyI6IkwxVWFhWEhmWGtIRmR4Z0tUMHdqRkpTNjRQZz0i%0AfQ==%0A
   sha: f0e0529ed73587c2c4aaeb3f3a01555bd6cfe05c
   size: 64846537
-erlang/otp_src_R15B03.tar.gz:
-  object_id: eyJvaWQiOiI0ZTRlNzhiY2E2MWUxMjIwMDRlNGU4ZWM2YjQ0YjYwNTEzNTQ3%0AZWMxYWM5MiIsInNpZyI6InNLK08vTnVaZmY0VkZ6UGJlOVY0NEQ5QW4vQT0i%0AfQ==%0A
-  sha: 06a6788e77339f228b2dc6753af9755c6bbede7f
-  size: 76123810
 nginx/lbase64.tar.gz:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2ExMWUxMjIwMDRlNGU4ZWM2NDg0MzEwNGYzMDY4%0AMTc2ODgzNSIsInNpZyI6IlZ3dmoxRDVmTXQrY0xrcm5QOUFNdFFYeWtlcz0i%0AfQ==%0A
   sha: 5692619dae780dbdf9edc994f9dcd7dce7b24646
@@ -443,6 +439,10 @@ rabbitmq/rabbitmq-server-with-plugins-generic-unix-2.8.7.tar.gz:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2EyMWUxMjIyMDRlNGU5ODYzOTI2YjEwNTA5MGQ2%0AYzUzNDc5NCIsInNpZyI6IlFJVjA0TDA5ZlZqZUlZeUNGcHZaMU4zclgxND0i%0AfQ==%0A
   sha: 23db4c0fb8a43a0131f8e909c2821aaf85ea410b
   size: 2894762
+rabbitmq/rabbitmq-server-with-plugins-generic-unix-3.0.4.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2ExMWUxMjEyMDRlNGU4NmVlMTUyOTQwNTE0OTE1%0ANmM5ZTVmZiIsInNpZyI6IjNlUSt5VnFGbFcrVlFSLzZTdGxkUGUvdXlTVT0i%0AfQ==%0A
+  sha: 70ea6912251056f49d7bf2a94f1ea5852d0518ca
+  size: 3570257
 nats/vendor/cache/json_pure-1.6.5.gem:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2E0MWUxMjIyMDRlNGU5ODYzZDA3NjMwNGY1MjVm%0AMDAxYjZkMSIsInNpZyI6Imh1ZGFBVUk1V1VzaE5jU01UQnE5andIaCtBVT0i%0AfQ==%0A
   sha: 739c40b6acebe9b7b3fdcaf3ff6bd4600ce3dcfb
@@ -839,3 +839,11 @@ buildpack_cache/npm-1.2.12.tgz:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2E2MWUxMjEwMDRlNGU3ZDUxZDk1MGUwNTE0OGUx%0AMGQ3MDgyOCIsInNpZyI6InJ0SlZibTZXd2E3cFcvek5WRURwTlRlV0RHYz0i%0AfQ==%0A
   sha: 04d39968240e261cb524af75b77cdd537aca931e
   size: 1830939
+postgresql/postgresql-9.2-x86_64.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2E2MWUxMjIwMDRlNGU4ZWM2YjQ0YjYwNTEzOTU4%0ANmRlZmYzMiIsInNpZyI6IkpOVWRvUkJPYVdBTmN5WG1EU2w0WjNDWWU5ND0i%0AfQ==%0A
+  sha: de2c5f6cb707b9fcb31ff841a9845e2acddfdbb2
+  size: 10516592
+postgresql/postgresql-initdb-9.2-x86_64.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2ExMWUxMjIwMDRlNGU4ZWM2NDg0MzEwNTEzOTQ2%0AYzFjY2I0OCIsInNpZyI6ImYvenNEZzVNN1ZOdDJSV3JVZGtOSGhGSE9vbz0i%0AfQ==%0A
+  sha: 6f46ff94648219840fa475eb95bfa23a5f4bf905
+  size: 4146878
