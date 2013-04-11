@@ -89,7 +89,7 @@ warden:
   <% end %>
   service_common_dir: /var/vcap/store/postgresql_common
   image_dir: /var/vcap/store/postgresql_image
-  service_start_timeout: <%= warden.servie_start_timeout || 3 %>
+  service_start_timeout: <%= warden.service_start_timeout || 3 %>
   filesystem_quota: <%= warden.filesystem_quota || "false" %>
 <% if warden.clean_image_cache %>
   clean_image_cache: true
@@ -110,3 +110,5 @@ db_connect_timeout: <%= plan_enabled && plan_conf.db_connect_timeout || 3 %>
 db_query_timeout: <%= plan_enabled && plan_conf.db_query_timeout || 10 %>
 db_use_async_query: <%= plan_enabled && !plan_conf.db_use_async_query.nil? && plan_conf.db_use_async_query.to_s || "true" %>
 warden_socket_path: <%= node.warden_socket_path || "/tmp/warden.sock" %>
+enable_xlog_enforcer: <%= plan_enabled && !plan_conf.enable_xlog_enforcer.nil? && plan_conf.enable_xlog_enforcer.to_s || "true" %>
+xlog_enforce_tolerance: <%= plan_enabled && plan_conf.xlog_enforce_tolerance || 5 %>

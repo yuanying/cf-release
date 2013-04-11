@@ -675,10 +675,10 @@ libyaml/yaml-0.1.4.tgz:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2E1MWUxMjIwMDRlNGU4ZWM2ODQwNzcwNTExZDM1%0AZmZjOTFiZCIsInNpZyI6IlIwQk51U2ZSTVQ1czgzVHpPQkZBVVFxYjJWaz0i%0AfQ==%0A
   sha: e0e5e09192ab10a607e3da2970db492118f560f2
   size: 471759
-uaa/cloudfoundry-identity-uaa-1.4.0.war:
-  object_id: eyJvaWQiOiI0ZTRlNzhiY2E1MWUxMjIyMDRlNGU5ODYzZjI4ZjMwNTEzNjZh%0ANGFkNjhhNyIsInNpZyI6Ik9YUGJTd1FWZWtTbXRqSDZGcEZZUDhwcTg5TT0i%0AfQ==%0A
-  sha: a71fb0faa2504ed91d9d1f74cc8499e9c90cb560
-  size: 19968040
+uaa/cloudfoundry-identity-uaa-1.4.1.war:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2EyMWUxMjIyMDRlNGU5ODYzOTI2YjEwNTE1MzQw%0ANGVmMmE2ZiIsInNpZyI6ImRZS1ZCMkVQeEd5MjM5ODNwTlhoamUybFc4OD0i%0AfQ==%0A
+  sha: f5834992f993253e54d61d3c4f6ca4cc390b641a
+  size: 21351766
 login/cloudfoundry-login-server-1.2.0.war:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2ExMWUxMjEwMDRlNGU3ZDUxMWY4MjEwNTEzNjYz%0AMTcwODgwYyIsInNpZyI6IkFCSitUZm1HanF1RGZlb1RuVVA0UTNUL0w1RT0i%0AfQ==%0A
   sha: 696c1937cf2f2959f11e872d9ec8a6b66913c1eb
@@ -739,18 +739,6 @@ buildpack_cache/mysql-connector-java-5.1.12.jar:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2EzMWUxMjIwMDRlNGU4ZWM2NDZlMjEwNTEzOTE5%0AMTc2YTIxYiIsInNpZyI6Ikx5K1dxcjE3VnEybnJWbnBaKzFSdTNaZVd6WT0i%0AfQ==%0A
   sha: 14ae02cc2adb2aed677080a0c0356e7569e298ec
   size: 732695
-buildpack_cache/openjdk6-u25-heroku-temaki.tar.gz:
-  object_id: eyJvaWQiOiI0ZTRlNzhiY2E1MWUxMjIyMDRlNGU5ODYzZjI4ZjMwNTEzOTE5%0AMWM5MmMxZSIsInNpZyI6IlNzUW9MMFo1UWgyOTZid1B0ME4vQ0w2WnZYVT0i%0AfQ==%0A
-  sha: 97946cad1ef0dac181bc974a9b42353b298a2484
-  size: 42334868
-buildpack_cache/openjdk7-u7-heroku-temaki-b30.tar.gz:
-  object_id: eyJvaWQiOiI0ZTRlNzhiY2EyMWUxMjEwMDRlNGU3ZDUxMWY1NTMwNTEzOTE5%0AMmY5YzNiZSIsInNpZyI6IkhoMlM5OFRyUzFTcFZSRVlCNDVCK3dGL0JzRT0i%0AfQ==%0A
-  sha: 60acd97375afc48eb87f64327e4f742e087ebb65
-  size: 45115775
-buildpack_cache/openjdk8-lambda-preview.tar.gz:
-  object_id: eyJvaWQiOiI0ZTRlNzhiY2E0MWUxMjEyMDRlNGU4NmVlNTM5MjEwNTEzOTE5%0ANDMzOTI5MiIsInNpZyI6IkI4WUd1S3NLMnZHdzdEeW9JcmUyaWVMZTRxRT0i%0AfQ==%0A
-  sha: 01f6f74960017a9f8b410d6a47e2433f1057725e
-  size: 45829916
 buildpack_cache/postgresql-9.0-801.jdbc4.jar:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2EyMWUxMjIwMDRlNGU4ZWM2NDdhNTQwNTEzOTE5%0ANGViMDQ2ZSIsInNpZyI6Img4TitUZ0lQb3M5dDMyb2l3MVVSelc0aDQwST0i%0AfQ==%0A
   sha: 153f2f92a786f12fc111d0111f709012df87c808
@@ -847,3 +835,48 @@ postgresql/postgresql-initdb-9.2-x86_64.tar.gz:
   object_id: eyJvaWQiOiI0ZTRlNzhiY2ExMWUxMjIwMDRlNGU4ZWM2NDg0MzEwNTEzOTQ2%0AYzFjY2I0OCIsInNpZyI6ImYvenNEZzVNN1ZOdDJSV3JVZGtOSGhGSE9vbz0i%0AfQ==%0A
   sha: 6f46ff94648219840fa475eb95bfa23a5f4bf905
   size: 4146878
+java/openjre1.6_64.tgz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2EyMWUxMjIyMDRlNGU5ODYzOTI2YjEwNTE1MjQw%0AYzE5MjZkZiIsInNpZyI6InpyT3B3UlpMaUZ1bGJiQzBIRGJ3YzVhVkhTdz0i%0AfQ==%0A
+  sha: 44017427ae3d543d625ed60f3edd560b01695071
+  size: 25414767
+java/jre1.6.0_x64.tgz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2EzMWUxMjIyMDRlNGU5ODYzYjFiNzQwNTE1MzJl%0AY2IxODFjYyIsInNpZyI6IldsU1ZiWm50VGVQYUNMd1JjMDhERktEMko2dz0i%0AfQ==%0A
+  sha: d5be7aa61a84c27c64451703404d7bddb60570fb
+  size: 32071543
+buildpack_cache/openjdk6-jre-u25.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2EzMWUxMjEwMDRlNGU3ZDUxNDc0NWYwNTE1NDhj%0ANTg2NWYxNyIsInNpZyI6InRweE9HckRDd1pvc2d1WXpMTXpKVjdTL3lDQT0i%0AfQ==%0A
+  sha: 338fd3f61181e4cef07ee229d3f10100af2c2f1f
+  size: 31099765
+buildpack_cache/openjdk7-jre-u7-b30.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2EzMWUxMjEyMDRlNGU4NmVlMzk2OTIwNTE1NDhj%0ANWQ1NmI1MyIsInNpZyI6IldLbklySVFSaVRndDZiQTIzRHUxaURpUlJmYz0i%0AfQ==%0A
+  sha: 40a9cda90dd0ab3313f6dd52949582d1aaee518b
+  size: 33459081
+buildpack_cache/openjdk8-jre-lambda-preview.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2E1MWUxMjIwMDRlNGU4ZWM2ODQwNzcwNTE1NDhj%0ANjY5Y2U3ZSIsInNpZyI6IjBXMEhGSElxWG1pTGMwc0xHVEpuWjRqVWFRZz0i%0AfQ==%0A
+  sha: 198d51abe2043cbebb0d82caa39ea9f8302f67b7
+  size: 34001909
+mongodb/mongodb-linux-i686-2.0.9.tgz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2E2MWUxMjEwMDRlNGU3ZDUxZDk1MGUwNTE1ZTA2%0AZDcyNDg5OCIsInNpZyI6IkVvcExPdkd3Q1FJR1RXem83MGJlQjYrZXd4cz0i%0AfQ==%0A
+  sha: 3d24e0f8a5554747d4a6ed1e193a489d2c123074
+  size: 38415939
+mongodb/mongodb-linux-x86_64-2.0.9.tgz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2E0MWUxMjEyMDRlNGU4NmVlNTM5MjEwNTE1ZTA2%0AZDZiZjdiMiIsInNpZyI6Imswc3VTWHgyOGRWY2hKYVlqTkFqZDNOZnZIWT0i%0AfQ==%0A
+  sha: 4176d3ba583235fddd403eb335f7b7353604fce8
+  size: 38649815
+postgresql/postgresql-9.0.13-x86_64.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2ExMWUxMjEwMDRlNGU3ZDUxMWY4MjEwNTE1ZjE1%0AYWZlMGU4NCIsInNpZyI6IlN6V2tNUEd6Q0tVdEFlbjRoYndTK0QydTdQUT0i%0AfQ==%0A
+  sha: 04c9c94161552408eaa65b0a3fba312aec08aa1a
+  size: 24861255
+postgres/postgresql-9.0.13-x86_64.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2E1MWUxMjEyMDRlNGU4NmVlOGUyYzkwNTE1ZjBi%0AYmM1NGQyMiIsInNpZyI6IlV5bHFubS9lTVFMeTIzWUVKcFdZaEdScFhvbz0i%0AfQ==%0A
+  sha: 4f57c0364065c7dc347ab1246e84e2fbfa11dfbc
+  size: 12822460
+mongodb/mongodb-linux-x86_64-2.2.4.tgz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2E0MWUxMjIyMDRlNGU5ODYzZDA3NjMwNTE2MmY0%0ANWU0NjhmYSIsInNpZyI6Im5zZ0k1WE9QVHBtNmR5aW1RS1o5cFp3Ry9YRT0i%0AfQ==%0A
+  sha: c2ef30a7c7039b4d499e990454b00a2032e6f19f
+  size: 56410012
+postgresql/postgresql-9.2.4-x86_64.tar.gz:
+  object_id: eyJvaWQiOiI0ZTRlNzhiY2EzMWUxMjIyMDRlNGU5ODYzYjFiNzQwNTE2NDUx%0AZGZkZWRhMiIsInNpZyI6IlRlZGF0RWYvKzBROFFmVFIyL3ZDcHMyZVJaVT0i%0AfQ==%0A
+  sha: !binary |-
+    Y2YzNDBjYTUxZWNhYWZjMDRhYTlkM2M2NDkwZmI3ZDU3ZmQ1YTNiNw==
+  size: 10519400

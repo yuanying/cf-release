@@ -1,10 +1,10 @@
-#- p01
-deployment: jenkins_build.check http://cf-jenkins-private.local:8080 staging_deploy
-yeti: jenkins_build.check http://cf-jenkins-private.sf.pivotallabs.com:8080 staging_yeti
+#- tabasco
+deployment: jenkins_build.check $AWS_CI_URL tabasco_deploy
+yeti: jenkins_build.check $AWS_CI_URL tabasco_yeti
 
-#- p02
-deployment: jenkins_build.check http://cf-jenkins-private.local:8080 release_deploy
-yeti: jenkins_build.check http://cf-jenkins-private.sf.pivotallabs.com:8080 release_yeti
+#- a1
+deployment: jenkins_build.check $AWS_CI_URL a1_deploy
+yeti: jenkins_build.check $AWS_CI_URL a1_yeti
 
 #- Ng
 cc: travis.check cloudfoundry cloud_controller_ng
