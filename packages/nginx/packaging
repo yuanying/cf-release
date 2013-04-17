@@ -82,6 +82,7 @@ echo "Building nginx..."
   export LUA_INC=${BOSH_INSTALL_TARGET}/lua/include
   ./configure \
     --prefix=${BOSH_INSTALL_TARGET} \
+    --with-cc-opt='-Wno-error' \
     --with-pcre=../pcre-8.12 \
     --with-http_ssl_module \
     --add-module=../headers-more-v0.15rc1 \
