@@ -1,26 +1,31 @@
 #!/bin/bash
 
-export PATH=/var/vcap/packages/ruby/bin:$PATH
-
-CONF_DIR=/var/vcap/jobs/router/config
-
-RUN_DIR=/var/vcap/sys/run/router
-LOG_DIR=/var/vcap/sys/log/router
-PIDFILE=$RUN_DIR/router.pid
+RUN_DIR=/var/vcap/sys/run/gorouter
+LOG_DIR=/var/vcap/sys/log/gorouter
+PIDFILE=$RUN_DIR/gorouter.pid
 
 source /var/vcap/packages/common/utils.sh
 
 case $1 in
 
   start)
-    pid_guard $PIDFILE "Router"
+    pid_guard $PIDFILE "gorouter"
+
+    # Install libcap2-bin. This can be removed once libcap2-bin is available in the stemcell itself.
+    dpkg -i /var/vcap/packages/gorouter/misc/libcap2-bin_1%3a2.17-2ubuntu1_amd64.deb
 
     mkdir -p $RUN_DIR
     mkdir -p $LOG_DIR
 
-    echo $$ > $PIDFILE
+    chown -R vcap:vcap $RUN_DIR
+    chown -R vcap:vcap $LOG_DIR
 
-    # ephemeral port range
+    # DON'T WRITE PID FILE HERE
+    # The PID file is written by the gorouter when it starts serving requests (after a delay).
+    # If the PID file would be written here, monit considers the gorouter to be started too early.
+    # BOSH -- in turn -- continues to roll other routers, while this one is not yet ready.
+
+    # Ephemeral port range
     echo "1024 65535" > /proc/sys/net/ipv4/ip_local_port_range
 
     # TCP_FIN_TIMEOUT
@@ -45,16 +50,24 @@ case $1 in
 
     echo 1 > /proc/sys/net/ipv4/tcp_tw_reuse
 
+    # Allow a few more queued connections than are allowed by default
+    echo 1024 > /proc/sys/net/core/somaxconn
+
+    # Allowed number of open file descriptors
+    ulimit -n 100000
+
     <% if properties.syslog_aggregator %>
-    /var/vcap/packages/syslog_aggregator/setup_syslog_forwarder.sh $CONF_DIR
+    /var/vcap/packages/syslog_aggregator/setup_syslog_forwarder.sh /var/vcap/jobs/gorouter/config
     <% end %>
 
-    /var/vcap/jobs/router/bin/setup_trafficlog_forwarder.sh $CONF_DIR
+    (crontab -l | sed /gorouter.*logrotate/d; cat /var/vcap/jobs/gorouter/config/gorouter_logrotate.cron) | sed /^$/d | crontab
 
-    exec /var/vcap/packages/router/bin/router \
-         -c /var/vcap/jobs/router/config/router.yml \
-         >>$LOG_DIR/router.stdout.log \
-         2>>$LOG_DIR/router.stderr.log
+    setcap cap_net_bind_service=+ep /var/vcap/packages/gorouter/bin/router
+
+    exec chpst -u vcap:vcap /var/vcap/packages/gorouter/bin/router \
+         -c /var/vcap/jobs/gorouter/config/gorouter.yml \
+         1>>$LOG_DIR/gorouter.stdout.log \
+         2>>$LOG_DIR/gorouter.stderr.log
 
     ;;
 
