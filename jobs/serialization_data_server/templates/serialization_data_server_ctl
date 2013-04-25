@@ -36,7 +36,9 @@ case $1 in
     <% end %>
 
     mkdir -p $SNAPSHOT_DIR
+    <% if properties.micro %>
     check_mount "$MT_OPTS" "$MT_EXPORT" "$SNAPSHOT_DIR"
+    <% end %>
     mkdir -p $SDS_TMP_UPLOAD_DIR
     chown vcap:vcap $SDS_TMP_UPLOAD_DIR
 
