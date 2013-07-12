@@ -2,14 +2,15 @@
 local_route: <%= spec.networks.send(properties.networks.apps).ip %>
 port: 9022 # external CC port
 pid_filename: /var/vcap/sys/run/cloud_controller_ng/cloud_controller_ng.pid
-nats_uri: nats://<%= p("nats.user") %>:<%= p("nats.password") %>@<%= p("nats.address") %>:<%= p("nats.port") %>
+message_bus_uri: nats://<%= p("nats.user") %>:<%= p("nats.password") %>@<%= p("nats.address") %>:<%= p("nats.port") %>
 
 external_domain:
   - <%= p("ccng.external_host", "ccng") %>.<%= p("domain") %>
   - "api.<%= p("domain") %>"
 
-<% system_domains = p("ccng.system_domains", [ p("domain") ]) %>
-system_domains: [ <%= system_domains.join(", ") %> ]
+system_domain_organization: <%= p("system_domain_organization") %>
+system_domain: <%= p("system_domain") %>
+app_domains: [ <%= p("app_domains").join(", ") %> ]
 
 cc_partition: <%= p("ccng.cc_partition", "ng") %>
 
@@ -19,16 +20,11 @@ bulk_api:
   auth_user: <%= p("ccng.bulk_api_user", "bulk_api") %>
   auth_password: "<%= p("ccng.bulk_api_password") %>"
 
-service_lifecycle:
-  max_upload_size: 1
-  upload_token: "<%= p("serialization_data_server.upload_token") %>"
-  upload_timeout: <%= p("serialization_data_server.upload_timeout") %>
-  <% sds_port = p("serialization_data_server.port") %>
-  serialization_data_server: <%= properties.service_lifecycle.serialization_data_server.map {|ip| "http://#{ip}:#{sds_port}" } %>
-
 nginx:
   use_nginx: <%= p("ccng.use_nginx", true) %>
   instance_socket: "/var/vcap/sys/run/cloud_controller_ng/cloud_controller.sock"
+
+index: <%= spec.index %>
 
 info:
   name: <%= p("name", "vcap") %>
@@ -111,6 +107,11 @@ quota_definitions:
     non_basic_services_allowed: <%= p("ccng.quota_definitions.runaway.non_basic_services_allowed") %>
     total_services: <%= p("ccng.quota_definitions.runaway.total_services") %>
     memory_limit: <%= p("ccng.quota_definitions.runaway.memory_limit") %>
+  trial:
+    non_basic_services_allowed: false
+    total_services: 10
+    memory_limit: 2048
+    trial_db_allowed: true
 
 default_quota_definition: <%= p("ccng.default_quota_definition") %>
 
@@ -118,6 +119,12 @@ resource_pool:
   minimum_size: <%= p("ccng.resource_pool.minimum_size") %>
   maximum_size: <%= p("ccng.resource_pool.maximum_size") %>
   resource_directory_key: <%= p("ccng.resource_pool.resource_directory_key") %>
+<% if_p("ccng.resource_pool.cdn") do %>
+  cdn:
+    uri: <%= p("ccng.resource_pool.cdn.uri") %>
+    key_pair_id: <%= p("ccng.resource_pool.cdn.key_pair_id") %>
+    private_key: <%= p("ccng.resource_pool.cdn.private_key").inspect %>
+<% end %>
   fog_connection:
 <% if_p("ccng.resource_pool.fog_connection.provider") do |provider| %>
     provider: <%= provider %>
@@ -131,6 +138,12 @@ resource_pool:
 
 packages:
   app_package_directory_key: <%= p("ccng.packages.app_package_directory_key") %>
+<% if_p("ccng.packages.cdn") do %>
+  cdn:
+    uri: <%= p("ccng.packages.cdn.uri") %>
+    key_pair_id: <%= p("ccng.packages.cdn.key_pair_id") %>
+    private_key: <%= p("ccng.packages.cdn.private_key").inspect %>
+<% end %>
   fog_connection:
 <% if_p("ccng.packages.fog_connection.provider") do |provider| %>
     provider: <%= provider %>
@@ -144,6 +157,12 @@ packages:
 
 droplets:
   droplet_directory_key: <%= p("ccng.droplets.droplet_directory_key") %>
+<% if_p("ccng.droplets.cdn") do %>
+  cdn:
+    uri: <%= p("ccng.droplets.cdn.uri") %>
+    key_pair_id: <%= p("ccng.droplets.cdn.key_pair_id") %>
+    private_key: <%= p("ccng.droplets.cdn.private_key").inspect %>
+<% end %>
   fog_connection:
 <% if_p("ccng.droplets.fog_connection.provider") do |provider| %>
     provider: <%= provider %>
@@ -154,3 +173,8 @@ droplets:
     aws_secret_access_key: <%= p("ccng.droplets.fog_connection.aws_secret_access_key") %>
   <% end %>
 <% end %>
+
+db_encryption_key: <%= p("ccng.db_encryption_key") %>
+
+trial_db:
+  guid: "78ad16cf-3c22-4427-a982-b9d35d746914"
